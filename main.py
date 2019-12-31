@@ -14,11 +14,12 @@ pg.display.set_caption("Typing Experience")
 
 font = pg.font.Font('font/FiraCode-Bold.ttf', 32) 
 
-text_gen = TextGenerator() 
-text   = "_".join(text_gen.gen())
+def gen_set():
+    text_gen = TextGenerator() 
+    text   = "_".join(text_gen.gen())
+    return KeyHandler(text)
 
-handler = KeyHandler(text)
-
+handler = gen_set()
 
 while True:
     
@@ -27,8 +28,11 @@ while True:
             pg.quit()
             sys.exit(0)
         if event.type == KEYDOWN and not handler.finished():
-            handler.handle(pg.key.name(event.key))
-    
+            key = pg.key.name(event.key)
+            if key == "escape":
+                handler = gen_set()
+            else:
+                handler.handle(key)
     DSURF.fill(BGCOLOR.value)
     
     drawText(DSURF, *handler.draw_text(), TEXTRECT , font)
