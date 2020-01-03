@@ -8,6 +8,7 @@ class KeyHandler():
         self.colors = [Color.YELLOW.value for _ in text]
         self.pos = 0
         self.time = 0
+        self.time_last_click = 0
         self.mispels = 0
     
     def finished(self):
@@ -28,12 +29,18 @@ class KeyHandler():
     
     def handle(self,key):
         if self.time == 0:
-            self.time = time.time() 
+            self.time = time.time()
+            self.time_last_click = time.time()
         if key == "space":
             key = "_"
         if self.text[self.pos] == key:
             self.colors[self.pos] = Color.BLUE.value
             self.pos += 1
+            # TODO: add log for key press time
+            new_click_time = time.time()
+            delta = new_click_time = self.time_last_click
+            self.time_last_click = new_click_time
+        
             if self.finished():
                 self.time = time.time() - self.time
                 self.writelog()

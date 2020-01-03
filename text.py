@@ -2,6 +2,7 @@ import random
 from pygame import Rect
 letters = 'abcdefghijklmnopqrstuvwxyz'
 class TextGenerator():   
+    
     def __init__(self,letters=letters,min_len=3,max_len=7,min_words=20,max_words=30):
         self.letters = letters
         self.min_len = min_len

@@ -27,15 +27,15 @@ while True:
         if event.type == QUIT:
             pg.quit()
             sys.exit(0)
-        if event.type == KEYDOWN and not handler.finished():
+        if event.type == KEYDOWN:
             key = pg.key.name(event.key)
+            if not handler.finished():
+                handler.handle(key)
             if key == "escape":
                 handler = gen_set()
-            else:
-                handler.handle(key)
     DSURF.fill(BGCOLOR.value)
     
     drawText(DSURF, *handler.draw_text(), TEXTRECT , font)
-    drawText(DSURF,*handler.draw_score(), SCORERECT, font)
+    drawText(DSURF, *handler.draw_score(), SCORERECT, font)
     
     pg.display.update()
