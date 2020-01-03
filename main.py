@@ -29,7 +29,12 @@ while True:
             sys.exit(0)
         if event.type == KEYDOWN:
             key = pg.key.name(event.key)
+            print(key)
+            if "shift" in key:
+                continue
             if not handler.finished():
+                if KMOD_SHIFT & event.mod:
+                    key = key.upper()
                 handler.handle(key)
             if key == "escape":
                 handler = gen_set()
