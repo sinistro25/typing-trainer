@@ -29,7 +29,6 @@ while True:
             sys.exit(0)
         if event.type == KEYDOWN:
             key = pg.key.name(event.key)
-            print(key)
             if "shift" in key:
                 continue
             if not handler.finished():
@@ -38,6 +37,7 @@ while True:
                 handler.handle(key)
             if key == "escape":
                 handler = gen_set()
+                
     DSURF.fill(BGCOLOR.value)
     
     drawText(DSURF, *handler.draw_text(), TEXTRECT , font)
