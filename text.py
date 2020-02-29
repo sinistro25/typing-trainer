@@ -1,24 +1,26 @@
 import random
 from pygame import Rect
-letters = 'abcdefghijklmnopqrstuvwxyz'
+import words_selector
+
+letters = "abcdefghijklmnopqrstuvxwyz"
+
 class TextGenerator():   
     
-    def __init__(self,letters=letters,min_len=3,max_len=7,min_words=20,max_words=30):
-        self.letters = letters
+    def __init__(self,min_len=3,max_len=7,min_words=20,max_words=30):
         self.min_len = min_len
         self.max_len = max_len
         self.min_words = min_words
         self.max_words = max_words
         
     def gen(self):
+        words = words_selector.words_by_letter(random.choice(letters))
+
+Latest update
+Page 3
         n = random.randint(self.min_words, self.max_words)
         line = []
         for i in range(n):
-            l = random.randint(self.min_len, self.max_len)
-            s = ""
-            for j in range(l):
-                s += random.choice(self.letters)
-            line.append(s)
+            line.append(random.choice(words))
         return line
 
 if __name__ == "__main__":

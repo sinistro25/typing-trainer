@@ -9,6 +9,7 @@ SCORERECT = (MARGIN,HEIGHT-2*MARGIN,WIDTH-2*MARGIN,2*MARGIN)
 
 WPMLOGFILE = "log/wpm.txt"
 ACCLOGFILE = "log/acc.txt"
+KEYLOGFILE = "log/key_latency.pkl"
 
 class Color(Enum):
     RED    = (255,0,0)
