@@ -11,6 +11,8 @@ WPMLOGFILE = "log/wpm.txt"
 ACCLOGFILE = "log/acc.txt"
 KEYLOGFILE = "log/key_latency.pkl"
 
+ALPHABET = "abcdefghijklmnopqrstuvxwyz"
+
 class Color(Enum):
     RED    = (255,0,0)
     GREEN  = (4,80,24)

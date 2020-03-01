@@ -1,8 +1,9 @@
 import random
 from pygame import Rect
 import words_selector
-
-letters = "abcdefghijklmnopqrstuvxwyz"
+import numpy as np
+from key_score import score
+from config import *
 
 class TextGenerator():   
     
@@ -13,10 +14,9 @@ class TextGenerator():
         self.max_words = max_words
         
     def gen(self):
-        words = words_selector.words_by_letter(random.choice(letters))
-
-Latest update
-Page 3
+        choice = np.random.choice(list(ALPHABET),p=score())
+        print(choice)
+        words = words_selector.words_by_letter(choice)
         n = random.randint(self.min_words, self.max_words)
         line = []
         for i in range(n):
