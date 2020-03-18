@@ -25,7 +25,7 @@ def softmax(array):
     return tmp / tmp.sum()
 
 def save_score():
-    fig = plt.figure(figsize=(9,6))
+    fig = plt.figure(figsize=FIGURESIZE)
     ax1 = fig.add_subplot(211)
     ax2 = fig.add_subplot(212)
     ax1.bar(list(ALPHABET),calculate_avg_deviation())
@@ -33,8 +33,8 @@ def save_score():
     fig.savefig("key_score.png")
     plt.close(fig)
     
-@lru.lru_cache(maxsize=1,expires=30)
+@lru.lru_cache(maxsize=1,expires=CACHE_EXPIRES)
 def get_score_img():
     save_score()
-    return pg.image.load("key_score.png")
+    return pg.image.load(KEYSCOREIMG)
 

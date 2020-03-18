@@ -22,3 +22,6 @@ class Color(Enum):
 
 BGCOLOR = Color.GREEN
 
+FIGURESIZE      = (9,6)
+KEYSCOREIMG     = "key_score.png"
+CACHE_EXPIRES   = 30
