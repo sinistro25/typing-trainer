@@ -42,17 +42,23 @@ class KeyHandler():
             self.colors[self.pos] = Color.BLUE.value
             self.pos += 1
             
-            # TODO: add log for key press time
             new_click_time = time.time()
             delta = new_click_time - self.time_last_click
             self.time_last_click = new_click_time
-            
-            self.key_deltas[key].append(delta)
+            if key in self.key_deltas:
+                self.key_deltas[key].append(delta)
+            else:
+                self.key_deltas[key] = [delta]
         
             if self.finished():
                 self.time = time.time() - self.time
                 self.writelog()
-        else: 
+        else:
+        #    # reset
+        #     for i in range(self.pos):
+        #        self.colors[i] = Color.YELLOW.value
+        #     self.pos = 0  
+        #     self.time = time.time()
             self.mispels += 1
             self.colors[self.pos] = Color.RED.value
     

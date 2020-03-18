@@ -29,7 +29,7 @@ if __name__ == "__main__":
     ax2 = fig.add_subplot(212)
     ax1.bar(list(ALPHABET),calculate_avg_deviation())
     ax2.bar(list(ALPHABET),score())
-    fig.savefig("key_score4.png")
+    fig.savefig("key_score.png")
 
 
 

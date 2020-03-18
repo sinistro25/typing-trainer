@@ -15,8 +15,9 @@ class TextGenerator():
         
     def gen(self):
         choice = np.random.choice(list(ALPHABET),p=score())
-        print(choice)
+        # choice = "bcdjkqtvxz"
         words = words_selector.words_by_letter(choice)
+        # words = words_selector.digit_generator()
         n = random.randint(self.min_words, self.max_words)
         line = []
         for i in range(n):
