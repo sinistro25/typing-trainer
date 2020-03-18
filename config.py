@@ -1,8 +1,8 @@
 from enum import Enum
 
-HEIGHT = 600
-WIDTH = 900
-MARGIN = 70
+HEIGHT  = 600
+WIDTH   = 900
+MARGIN  = 70
 
 TEXTRECT  = (MARGIN,MARGIN,WIDTH-2*MARGIN,HEIGHT-2*MARGIN)
 SCORERECT = (MARGIN,HEIGHT-2*MARGIN,WIDTH-2*MARGIN,2*MARGIN)
@@ -11,8 +11,9 @@ WPMLOGFILE = "log/wpm.txt"
 ACCLOGFILE = "log/acc.txt"
 KEYLOGFILE = "log/key_latency.pkl"
 
-ALPHABET = "abcdefghijklmnopqrstuvxwyz"
-DIGITS = "0123456789"
+ALPHABET    = "abcdefghijklmnopqrstuvxwyz"
+DIGITS      = "0123456789"
+
 class Color(Enum):
     RED    = (255,0,0)
     GREEN  = (4,80,24)
@@ -22,6 +23,7 @@ class Color(Enum):
 
 BGCOLOR = Color.GREEN
 
+# key_score.py 
 FIGURESIZE      = (9,6)
 KEYSCOREIMG     = "key_score.png"
 CACHE_EXPIRES   = 30
