@@ -2,7 +2,8 @@ from config import *
 import pickle
 import matplotlib.pyplot as plt
 import numpy as np
-
+import pygame as pg
+import lru
 with open(KEYLOGFILE,"rb") as keylog:
     data = pickle.load(keylog)
 
@@ -23,13 +24,17 @@ def softmax(array):
     tmp = np.exp(array)
     return tmp / tmp.sum()
 
-if __name__ == "__main__":
-    fig = plt.figure()
+def save_score():
+    fig = plt.figure(figsize=(9,6))
     ax1 = fig.add_subplot(211)
     ax2 = fig.add_subplot(212)
     ax1.bar(list(ALPHABET),calculate_avg_deviation())
     ax2.bar(list(ALPHABET),score())
     fig.savefig("key_score.png")
-
-
+    plt.close(fig)
+    
+@lru.lru_cache(maxsize=1,expires=30)
+def get_score_img():
+    save_score()
+    return pg.image.load("key_score.png")
 
