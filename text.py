@@ -14,7 +14,19 @@ class Kind(Enum):
     
 
 class TextGenerator():   
-    
+    """
+        TextGenerator is used to generate typing text under certain constraints
+
+        Keywords arguments:
+        kind      -- the kind of training is going to be generated (default:Kind.UNIFORM)
+        min_len   -- the minimum size of any word in the text generated (default:3)
+        max_len   -- the maximum size of any word in the text generated (default:7)
+        min_words -- the minimum number of words in the text generated (default:20)
+        max_words -- the maximum number of words in the text generated (default:30)
+        
+        Methods:
+        gen() -- returns generated text under the generator  constraints
+    """
     def __init__(self,kind=Kind.UNIFORM,min_len=3,max_len=7,min_words=20,max_words=30):
         self.min_len = min_len
         self.max_len = max_len
@@ -46,10 +58,13 @@ if __name__ == "__main__":
         print(tg.gen())
 
 
-# draw some text into an area of a surface
-# automatically wraps words
-# returns any text that didn't get blitted
 def draw(surface, text, colors, rect, font):
+"""    
+    Draws text into an area of a surface and automatically wraps words
+
+    Return:
+    Any text that didn't get blitted due to lack of space
+"""
     rect = Rect(rect)
     y = rect.top
     lineSpacing = -2

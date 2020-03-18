@@ -15,6 +15,7 @@ class Scene(Enum):
 
 
 def typing(ctx):
+    """ Scene that shows a text that the player must type"""
     for event in pg.event.get():
         if event.type == QUIT:
             pg.quit()
@@ -40,6 +41,7 @@ def typing(ctx):
     return Scene.TYPING
 
 def key_score(ctx):
+    """Score information scene"""
     for event in pg.event.get():
         if event.type == QUIT:
             pg.quit()
@@ -54,6 +56,7 @@ def key_score(ctx):
 
 
 def menu(ctx):
+    """ Main menu scene"""
     for event in pg.event.get():
         if event.type == QUIT:
             pg.quit()

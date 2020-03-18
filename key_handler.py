@@ -54,11 +54,6 @@ class KeyHandler():
                 self.time = time.time() - self.time
                 self.writelog()
         else:
-        #    # reset
-        #     for i in range(self.pos):
-        #        self.colors[i] = Color.YELLOW.value
-        #     self.pos = 0  
-        #     self.time = time.time()
             self.mispels += 1
             self.colors[self.pos] = Color.RED.value
     
