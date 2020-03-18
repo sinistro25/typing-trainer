@@ -49,7 +49,7 @@ if __name__ == "__main__":
 # draw some text into an area of a surface
 # automatically wraps words
 # returns any text that didn't get blitted
-def drawText(surface, text, colors, rect, font):
+def draw(surface, text, colors, rect, font):
     rect = Rect(rect)
     y = rect.top
     lineSpacing = -2
