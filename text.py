@@ -4,20 +4,36 @@ import words_selector
 import numpy as np
 from key_score import score
 from config import *
+from enum import Enum,auto
+
+class Kind(Enum):
+    UNIFORM     = auto()
+    WEIGHTED    = auto()
+    NUMBERS     = auto()
+    REDUCED     = auto()
+    
 
 class TextGenerator():   
     
-    def __init__(self,min_len=3,max_len=7,min_words=20,max_words=30):
+    def __init__(self,kind=Kind.UNIFORM,min_len=3,max_len=7,min_words=20,max_words=30):
         self.min_len = min_len
         self.max_len = max_len
         self.min_words = min_words
         self.max_words = max_words
+        self.kind = kind
         
     def gen(self):
-        choice = np.random.choice(list(ALPHABET),p=score())
-        # choice = "bcdjkqtvxz"
-        words = words_selector.words_by_letter(choice)
-        # words = words_selector.digit_generator()
+        if self.kind is Kind.WEIGHTED:
+            choice = np.random.choice(list(ALPHABET),p=score())
+            words = words_selector.words_by_letter(choice)
+        elif self.kind is Kind.REDUCED:
+            choice = "bcdjkqtvxz"
+            words = words_selector.words_by_letter(choice)
+        elif self.kind is Kind.NUMBERS:    
+            words = words_selector.digit_generator()
+        elif self.kind is Kind.UNIFORM:
+            words = words_selector.words
+
         n = random.randint(self.min_words, self.max_words)
         line = []
         for i in range(n):
