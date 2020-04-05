@@ -1,3 +1,4 @@
 pygame==1.9.6
 matplotlib==2.2.2
 numpy==1.18.1
+lru-expiring-cache==1.1
