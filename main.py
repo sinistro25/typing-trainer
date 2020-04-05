@@ -20,12 +20,16 @@ def gen_set(kind):
 
 if __name__ == '__main__':
     pg.init()
-
+    pg.mixer.quit()
+    pg.event.set_blocked(MOUSEMOTION)
+    
     DSURF = pg.display.set_mode((WIDTH,HEIGHT))
     pg.display.set_caption("Typing Experience")
 
     font = pg.font.Font('font/FiraCode-Bold.ttf', 32) 
-
+    
+    # Fake event to trigger first update of the screen
+    pg.event.post(pg.event.Event(MOUSEMOTION))
     
     ctx = {"current_mode":0,
            "kind": None,

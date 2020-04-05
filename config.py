@@ -3,7 +3,6 @@ from enum import Enum
 # Window dimensions
 HEIGHT  = 600
 WIDTH   = 900
-
 # Text alignment
 MARGIN  = 70
 TEXTRECT  = (MARGIN,MARGIN,WIDTH-2*MARGIN,HEIGHT-2*MARGIN)

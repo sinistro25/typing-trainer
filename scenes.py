@@ -16,20 +16,18 @@ class Scene(Enum):
 
 def typing(ctx):
     """ Scene that shows a text that the player must type"""
-    for event in pg.event.get():
-        if event.type == QUIT:
-            pg.quit()
-            sys.exit(0)
-        if event.type == KEYDOWN:
-            key = pg.key.name(event.key)
-            if "shift" in key:
-                continue
-            if not ctx["handler"].finished():
-                if KMOD_SHIFT & event.mod:
-                    key = key.upper()
-                ctx["handler"].handle(key)
-            if key == "escape":
-                ctx["scene"],ctx["kind"] = Scene.MENU, None
+    event = pg.event.wait()
+    if event.type == QUIT:
+        pg.quit()
+        sys.exit(0)
+    if event.type == KEYDOWN:
+        key = pg.key.name(event.key)
+        if not ctx["handler"].finished():
+            if KMOD_SHIFT & event.mod:
+                key = key.upper()
+            ctx["handler"].handle(key)
+        if key == "escape":
+            ctx["scene"],ctx["kind"] = Scene.MENU, None
                 
     ctx["surface"].fill(BGCOLOR.value)
     font = ctx["font"]
@@ -42,14 +40,14 @@ def typing(ctx):
 
 def key_score(ctx):
     """Score information scene"""
-    for event in pg.event.get():
-        if event.type == QUIT:
-            pg.quit()
-            sys.exit(0)
-        elif event.type == KEYDOWN:
-            if event.key == K_ESCAPE:
-                ctx["scene"] = Scene.MENU
-                return
+    event = pg.event.wait()
+    if event.type == QUIT:
+        pg.quit()
+        sys.exit(0)
+    elif event.type == KEYDOWN:
+        if event.key == K_ESCAPE:
+            ctx["scene"] = Scene.MENU
+            return
     image = get_score_img()
     ctx["surface"].blit(image,(0,0,WIDTH,HEIGHT))
     pg.display.update()
@@ -57,26 +55,26 @@ def key_score(ctx):
 
 def menu(ctx):
     """ Main menu scene"""
-    for event in pg.event.get():
-        if event.type == QUIT:
-            pg.quit()
-            sys.exit(0)
-        if event.type == KEYDOWN:
-            if event.key == K_LEFT:
-                ctx["current_mode"] = (ctx["current_mode"]+3)%4
-            elif event.key == K_RIGHT:
-                ctx["current_mode"] = (ctx["current_mode"]+1)%4
-            elif event.key == K_DOWN:
-                ctx["current_mode"] = (ctx["current_mode"]+2)%4
-            elif event.key == K_UP:
-                ctx["current_mode"] = (ctx["current_mode"]+2)%4
-            elif event.key == K_RETURN:
-                ctx["scene"], ctx["kind"] = Scene.TYPING,list(text.Kind)[ctx["current_mode"]]
-                return
-            elif event.key == K_BACKQUOTE:
-                ctx["scene"] = Scene.SCORE
-                return
-            
+    event = pg.event.wait()
+    if event.type == QUIT:
+        pg.quit()
+        sys.exit(0)
+    if event.type == KEYDOWN:
+        if event.key == K_LEFT:
+            ctx["current_mode"] = (ctx["current_mode"]+3)%4
+        elif event.key == K_RIGHT:
+            ctx["current_mode"] = (ctx["current_mode"]+1)%4
+        elif event.key == K_DOWN:
+            ctx["current_mode"] = (ctx["current_mode"]+2)%4
+        elif event.key == K_UP:
+            ctx["current_mode"] = (ctx["current_mode"]+2)%4
+        elif event.key == K_RETURN:
+            ctx["scene"], ctx["kind"] = Scene.TYPING,list(text.Kind)[ctx["current_mode"]]
+            return
+        elif event.key == K_BACKQUOTE:
+            ctx["scene"] = Scene.SCORE
+            return
+        
     font = ctx["font"]
     padding = 30
     ctx["surface"].fill(BGCOLOR.value)
