@@ -36,7 +36,7 @@ def save_score():
     ax.bar(list(ALPHABET),calculate_avg())
     ax1.bar(list(ALPHABET),calculate_avg_deviation())
     ax2.bar(list(ALPHABET),score())
-    fig.savefig("key_score.png")
+    fig.savefig(KEYSCOREIMG)
     plt.close(fig)
     
 @lru.lru_cache(maxsize=1,expires=CACHE_EXPIRES)

@@ -39,8 +39,7 @@ if __name__ == '__main__':
             ctx["handler"] = gen_set(ctx["kind"])
             ctx["kind"] = None
         if ctx["scene"] == Scene.MENU:
-            scenes.menu(ctx)
-            
+            scenes.menu(ctx)         
         elif ctx["scene"] == Scene.TYPING:
             scenes.typing(ctx)
         elif ctx["scene"] == Scene.SCORE:

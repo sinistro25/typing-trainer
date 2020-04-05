@@ -59,12 +59,12 @@ if __name__ == "__main__":
 
 
 def draw(surface, text, colors, rect, font):
-"""    
+    """    
     Draws text into an area of a surface and automatically wraps words
 
     Return:
     Any text that didn't get blitted due to lack of space
-"""
+    """
     rect = Rect(rect)
     y = rect.top
     lineSpacing = -2
