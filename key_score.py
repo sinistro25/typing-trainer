@@ -39,12 +39,16 @@ def softmax(array):
 
 def save_score():
     fig = plt.figure(figsize=FIGURESIZE)
+    fig.suptitle("Typer Stats")
     ax = fig.add_subplot(311)
     ax1 = fig.add_subplot(312)
     ax2 = fig.add_subplot(313)
     ax.bar(list(ALPHABET),calculate_avg())
+    ax.set_ylabel("Avg latency (ms)")
     ax1.bar(list(ALPHABET),calculate_avg_deviation())
+    ax1.set_ylabel("Avg latency deviation (ms)")
     ax2.bar(list(ALPHABET),score())
+    ax2.set_ylabel("Relative difficulty")
     fig.savefig(KEYSCOREIMG)
     plt.close(fig)
     
