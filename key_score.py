@@ -4,9 +4,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pygame as pg
 import lru
-with open(KEYLOGFILE,"rb") as keylog:
-    data = pickle.load(keylog)
-
+try:
+    with open(KEYLOGFILE,"rb") as keylog:
+        data = pickle.load(keylog)
+except FileNotFoundError:
+    data = {key:[0] for key in ALPHABET}
+    
 def score():
     return softmax(15*calculate_avg_deviation())
 

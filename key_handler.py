@@ -12,8 +12,12 @@ class KeyHandler():
         self.time = 0
         self.time_last_click = 0
         self.mispels = 0
-        self.key_deltas = pickle.load(open(KEYLOGFILE,"rb"))
-    
+        
+        try:
+            self.key_deltas = pickle.load(open(KEYLOGFILE,"rb"))
+        except FileNotFoundError:
+            self.key_deltas = {}
+        
     def finished(self):
         return self.pos == len(self.text)
     
@@ -25,11 +29,11 @@ class KeyHandler():
         return score, [Color.YELLOW.value for _ in score]
     
     def writelog(self):
-        with open(WPMLOGFILE,"a") as wpmlog:
+        with open(WPMLOGFILE,"a+") as wpmlog:
             wpmlog.write(str(self.wpm())+"\n")
-        with open(ACCLOGFILE,"a") as acclog:
+        with open(ACCLOGFILE,"a+") as acclog:
             acclog.write(str(self.acc())+"\n")
-        with open(KEYLOGFILE,"wb") as keylog:
+        with open(KEYLOGFILE,"wb+") as keylog:
             pickle.dump(self.key_deltas,keylog)
     
     def handle(self,key):
