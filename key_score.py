@@ -4,19 +4,25 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pygame as pg
 import lru
-try:
-    with open(KEYLOGFILE,"rb") as keylog:
-        data = pickle.load(keylog)
-except FileNotFoundError:
-    data = {key:[0] for key in ALPHABET}
-    
+
 def score():
     return softmax(15*calculate_avg_deviation())
 
 def calculate_avg(N=100):
     avg = []
+    # Tries to read typing data, if it fails, defaults to a list with a zero
+    # for every letter on the alphabet
+    try:
+        with open(KEYLOGFILE,"rb") as keylog:
+            data = pickle.load(keylog)
+    except FileNotFoundError:
+        data = {key:[0] for key in ALPHABET}
+    
     for key in ALPHABET:
-        key_data = data[key]
+        if key in data:
+            key_data = data[key]
+        else:
+            key_data = [0]
         key_data = key_data[max(0,len(key_data)-N):]
         avg.append(np.mean(key_data))
     avg = np.array(avg)
