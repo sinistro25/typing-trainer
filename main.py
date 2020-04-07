@@ -29,7 +29,7 @@ if __name__ == '__main__':
     font = pg.font.Font('font/FiraCode-Bold.ttf', 32) 
     
     # Fake event to trigger first update of the screen
-    pg.event.post(pg.event.Event(MOUSEMOTION))
+    pg.event.post(pg.event.Event(KEYDOWN,key=0))
     
     ctx = {"current_mode":0,
            "kind": None,
