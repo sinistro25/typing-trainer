@@ -1,22 +1,22 @@
 import sys
-import pygame as game
 import time
 from enum import Enum,auto
 
+import pygame as game
 from pygame.locals import *
+
 from config        import *
-from text          import TextGenerator
 import text
+from text          import TextGenerator
 from key_handler   import KeyHandler
 from key_score import save_score, get_score_img
 import scenes
 from scenes import Scene
+
 def gen_set(kind):
     text_gen = TextGenerator(kind=kind) 
     text   = "_".join(text_gen.gen())
     return KeyHandler(text)
-
-
 
 if __name__ == '__main__':
     game.init()
@@ -48,6 +48,3 @@ if __name__ == '__main__':
             scenes.typing(ctx)
         elif ctx["scene"] == Scene.SCORE:
             scenes.key_score(ctx)
-            
-
-        
