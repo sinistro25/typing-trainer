@@ -1,0 +1,5 @@
+#!/bin/zsh
+source ~/anaconda3/etc/profile.d/conda.sh
+cd /home/wagner/Documents/code/github.com/wagner/typing_trainer/
+conda activate pygame
+python main.py > /dev/null &

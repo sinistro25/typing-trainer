@@ -1,7 +1,7 @@
 import sys
 from enum import Enum,auto
 
-import pygame as pg
+import pygame as game
 from pygame.locals import *
 from config import *
 
@@ -16,12 +16,12 @@ class Scene(Enum):
 
 def typing(ctx):
     """ Scene that shows a text that the player must type"""
-    event = pg.event.wait()
+    event = game.event.wait()
     if event.type == QUIT:
-        pg.quit()
+        game.quit()
         sys.exit(0)
     if event.type == KEYDOWN:
-        key = pg.key.name(event.key)
+        key = game.key.name(event.key)
         if not ctx["handler"].finished():
             if KMOD_SHIFT & event.mod:
                 key = key.upper()
@@ -34,15 +34,15 @@ def typing(ctx):
     text.draw(ctx["surface"], *ctx["handler"].draw_text(), TEXTRECT , font)
     text.draw(ctx["surface"], *ctx["handler"].draw_score(), SCORERECT, font)
     
-    pg.display.update()
+    game.display.update()
     
     return Scene.TYPING
 
 def key_score(ctx):
     """Score information scene"""
-    event = pg.event.wait()
+    event = game.event.wait()
     if event.type == QUIT:
-        pg.quit()
+        game.quit()
         sys.exit(0)
     elif event.type == KEYDOWN:
         if event.key == K_ESCAPE:
@@ -50,14 +50,14 @@ def key_score(ctx):
             return
     image = get_score_img()
     ctx["surface"].blit(image,(0,0,WIDTH,HEIGHT))
-    pg.display.update()
+    game.display.update()
 
 
 def menu(ctx):
     """ Main menu scene"""
-    event = pg.event.wait()
+    event = game.event.wait()
     if event.type == QUIT:
-        pg.quit()
+        game.quit()
         sys.exit(0)
     if event.type == KEYDOWN:
         if event.key == K_LEFT:
@@ -94,6 +94,6 @@ def menu(ctx):
     ctx["surface"].blit(text2,MENU2)
     ctx["surface"].blit(text3,MENU3)
     ctx["surface"].blit(text4,MENU4)
-    pg.display.update()
+    game.display.update()
     
     ctx["scene"] =  Scene.MENU
