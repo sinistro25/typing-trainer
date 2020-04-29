@@ -1,50 +1,60 @@
 import sys
 import time
-from enum import Enum,auto
+import traceback
+import signal
+from enum import Enum, auto
 
 import pygame as game
 from pygame.locals import *
 
-from config        import *
-import text
-from text          import TextGenerator
-from key_handler   import KeyHandler
-from key_score import save_score, get_score_img
 import scenes
+import text
+from config import *
+from key_handler import KeyHandler
+from key_score import get_score_img, save_score
 from scenes import Scene
+from text import TextGenerator
+
 
 def gen_set(kind):
-    text_gen = TextGenerator(kind=kind) 
-    text   = "_".join(text_gen.gen())
+    text_gen = TextGenerator(kind=kind)
+    text = "_".join(text_gen.gen())
     return KeyHandler(text)
 
-if __name__ == '__main__':
-    game.init()
-    game.mixer.quit()
-    game.event.set_blocked(MOUSEMOTION)
-    
-    screen = game.display.set_mode((WIDTH,HEIGHT))
-    game.display.set_caption("Typing Experience")
 
-    font = game.font.Font('font/FiraCode-Bold.ttf', 32) 
-    
+def sigterm_handler(_x, _trace):
+    raise KeyboardInterrupt
+
+
+if __name__ == '__main__':
+    signal.signal(signal.SIGTERM, sigterm_handler)
+
+    screen = game.display.set_mode((WIDTH, HEIGHT))
+    game.display.set_caption("Typing Trainer")
+
+    font = game.font.Font('font/FiraCode-Bold.ttf', 32)
+
     # Fake event to trigger first update of the screen
-    game.event.post(game.event.Event(KEYDOWN,key=0))
-    
-    ctx = {"current_mode":0,
+    game.event.post(game.event.Event(KEYDOWN, key=0))
+
+    ctx = {"current_mode": 0,
            "kind": None,
            "scene": Scene.MENU,
            "surface": screen,
            "handler": None,
-           "font":font}
-
-    while True:
-        if ctx["kind"] is not None:
-            ctx["handler"] = gen_set(ctx["kind"])
+           "font": font}
+    try:
+        while True:
+            if ctx["kind"] is not None:
+                ctx["handler"] = gen_set(ctx["kind"])
             ctx["kind"] = None
-        if ctx["scene"] == Scene.MENU:
-            scenes.menu(ctx)         
-        elif ctx["scene"] == Scene.TYPING:
-            scenes.typing(ctx)
-        elif ctx["scene"] == Scene.SCORE:
-            scenes.key_score(ctx)
+
+            scenes.update(ctx)
+    except Exception:
+        print("\n\n\nA CRITICAL Error has occurred")
+        traceback.print_exc()
+        sys.exit(1)
+    except KeyboardInterrupt:
+        print("\n\n\nUser requested interruption")
+        print("Exiting...")
+        sys.exit(0)
