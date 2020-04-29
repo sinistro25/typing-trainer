@@ -36,6 +36,10 @@ class Color(Enum):
 BGCOLOR = Color.GREEN
 
 # key_score.py
-FIGURESIZE = (9, 6)
+FIGURESIZE = (25, 10)
 KEYSCOREIMG = "key_score.png"
 CACHE_EXPIRES = 30
+
+FONT = 'font/FiraCode-Bold.ttf'
+FONTSIZE = 50
+FONTANTIALIAS = True

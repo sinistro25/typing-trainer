@@ -102,13 +102,13 @@ def menu(ctx):
                           [0]-font.size("Digits")[0])/2 + padding, HEIGHT/2 + padding, 100, 100)
 
     text1 = font.render(
-        "Uniform", False, Color.YELLOW.value if ctx["current_mode"] != 0 else Color.RED.value)
+        "Uniform", FONTANTIALIAS, Color.YELLOW.value if ctx["current_mode"] != 0 else Color.RED.value)
     text2 = font.render(
-        "Weighted", False, Color.YELLOW.value if ctx["current_mode"] != 1 else Color.RED.value)
+        "Weighted", FONTANTIALIAS, Color.YELLOW.value if ctx["current_mode"] != 1 else Color.RED.value)
     text3 = font.render(
-        "Digits", False, Color.YELLOW.value if ctx["current_mode"] != 2 else Color.RED.value)
+        "Digits", FONTANTIALIAS, Color.YELLOW.value if ctx["current_mode"] != 2 else Color.RED.value)
     text4 = font.render(
-        "Reduced", False, Color.YELLOW.value if ctx["current_mode"] != 3 else Color.RED.value)
+        "Reduced", FONTANTIALIAS, Color.YELLOW.value if ctx["current_mode"] != 3 else Color.RED.value)
 
     ctx["surface"].blit(text1, MENU1)
     ctx["surface"].blit(text2, MENU2)

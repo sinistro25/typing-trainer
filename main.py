@@ -32,7 +32,7 @@ if __name__ == '__main__':
     screen = game.display.set_mode((WIDTH, HEIGHT))
     game.display.set_caption("Typing Trainer")
 
-    font = game.font.Font('font/FiraCode-Bold.ttf', 32)
+    font = game.font.Font(FONT, FONTSIZE)
 
     # Fake event to trigger first update of the screen
     game.event.post(game.event.Event(KEYDOWN, key=0))
