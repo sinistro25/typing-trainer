@@ -8,8 +8,8 @@ game.mixer.quit()
 game.event.set_blocked(MOUSEMOTION)
 
 info = game.display.Info()
-HEIGHT = info.current_h
-WIDTH = info.current_w
+HEIGHT = min(960, info.current_h)
+WIDTH = min(1440, info.current_w)
 # Text alignment
 MARGIN = 70
 TEXTRECT = (MARGIN, MARGIN, WIDTH-2*MARGIN, HEIGHT-2*MARGIN)

@@ -12,6 +12,7 @@ class Kind(Enum):
     WEIGHTED = auto()
     NUMBERS = auto()
     REDUCED = auto()
+    CODE = auto()
 
 
 class TextGenerator():
@@ -29,7 +30,7 @@ class TextGenerator():
         gen() -- returns generated text under the generator  constraints
     """
 
-    def __init__(self, kind=Kind.UNIFORM, min_len=3, max_len=7, min_words=100, max_words=100):
+    def __init__(self, kind=Kind.UNIFORM, min_len=3, max_len=7, min_words=20, max_words=20):
         self.min_len = min_len
         self.max_len = max_len
         self.min_words = min_words
@@ -44,9 +45,12 @@ class TextGenerator():
             choice = "bcdjkqtvxz"
             words = words_selector.words_by_letter(choice)
         elif self.kind is Kind.NUMBERS:
-            words = words_selector.digit_generator()
+            words = words_selector.code_generator(size=2*self.max_words)
+            #words = words_selector.digit_generator()
         elif self.kind is Kind.UNIFORM:
             words = words_selector.words
+        elif self.kind is Kind.CODE:
+            words = words_selector.code_generator()
 
         n = random.randint(self.min_words, self.max_words)
         line = []

@@ -33,9 +33,10 @@ def typing(ctx):
         sys.exit(0)
     if event.type == KEYDOWN:
         key = game.key.name(event.key)
-        if not ctx["handler"].finished():
+
+        if not "shift" in key and not ctx["handler"].finished():
             if KMOD_SHIFT & event.mod:
-                key = key.upper()
+                key = ctx["handler"].shift_key(key)
             ctx["handler"].handle(key)
         if key == "escape":
             ctx["scene"], ctx["kind"] = Scene.MENU, None
