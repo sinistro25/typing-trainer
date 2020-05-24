@@ -30,6 +30,7 @@ class Color(Enum):
     GREEN = (4, 80, 24)
     BLUE = (0, 0, 127)
     YELLOW = (255, 255, 0)
+    GREY = (127, 127, 127)
 
 
 # Background Color

@@ -7,7 +7,8 @@ class KeyHandler():
 
     def __init__(self, text):
         self.text = text
-        self.colors = [Color.YELLOW.value for _ in text]
+        self.colors = [
+            Color.YELLOW.value if word is not "_" else Color.GREY.value for word in text]
         self.pos = 0
         self.time = 0
         self.time_last_click = 0
