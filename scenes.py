@@ -103,14 +103,24 @@ def menu(ctx):
                           [0]-font.size("Digits")[0])/2 + padding, HEIGHT/2 + padding, 100, 100)
 
     text1 = font.render(
-        "Uniform", FONTANTIALIAS, Color.YELLOW.value if ctx["current_mode"] != 0 else Color.RED.value)
+        "Normal", FONTANTIALIAS, Color.YELLOW.value if ctx["current_mode"] != 0 else Color.RED.value)
     text2 = font.render(
         "Weighted", FONTANTIALIAS, Color.YELLOW.value if ctx["current_mode"] != 1 else Color.RED.value)
     text3 = font.render(
-        "Digits", FONTANTIALIAS, Color.YELLOW.value if ctx["current_mode"] != 2 else Color.RED.value)
+        "Code", FONTANTIALIAS, Color.YELLOW.value if ctx["current_mode"] != 2 else Color.RED.value)
     text4 = font.render(
         "Reduced", FONTANTIALIAS, Color.YELLOW.value if ctx["current_mode"] != 3 else Color.RED.value)
 
+    descriptions = ["Type words selected uniformally at random",
+                    "Type words favoring those whose letters you are slower at typing",
+                    "Type expressions that resemble code",
+                    f"Type words that contain the letters in the  set '{REDUCEDALPHABET}'"]
+    description = descriptions[ctx["current_mode"]]
+
+    DESCRITION = (max(2*padding, (WIDTH - font.size(descriptions[ctx["current_mode"]])[0])/2),
+                  HEIGHT-2*font.size(descriptions[ctx["current_mode"]])[1]-padding, WIDTH-3*padding, 200)
+    text.draw(ctx["surface"], description, [
+              Color.GREY.value for i in range(len(description))], DESCRITION, font)
     ctx["surface"].blit(text1, MENU1)
     ctx["surface"].blit(text2, MENU2)
     ctx["surface"].blit(text3, MENU3)

@@ -42,7 +42,7 @@ class TextGenerator():
             choice = np.random.choice(list(ALPHABET), p=score())
             words = words_selector.words_by_letter(choice)
         elif self.kind is Kind.REDUCED:
-            choice = "bcdjkqtvxz"
+            choice = REDUCEDALPHABET
             words = words_selector.words_by_letter(choice)
         elif self.kind is Kind.NUMBERS:
             words = words_selector.code_generator(size=2*self.max_words)

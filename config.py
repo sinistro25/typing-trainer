@@ -22,6 +22,7 @@ KEYLOGFILE = "log/key_latency.pkl"
 
 # Alphabets
 ALPHABET = "abcdefghijklmnopqrstuvxwyz"
+REDUCEDALPHABET = "bcdjkqtvxz"
 DIGITS = "0123456789"
 
 
