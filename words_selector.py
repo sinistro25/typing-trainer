@@ -78,7 +78,7 @@ def enclose(array, braces="[{(", antibraces="]})"):
     return tmp
 
 
-def code_generator(size=10):
+def code_generator(size=100):
     tmp = []
     tmp += assignment_generator(array_generator([i for i in range(size)], size=size) +
                                 enclose(int_comparison_generator(size=size), "(", ")"))
