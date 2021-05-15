@@ -39,11 +39,11 @@ def int_comparison_generator(size=20):
         b = random.randint(0, 100)
         op = ""
         if a < b:
-            op = random.choice(["<", "<=", "!="])
+            op = random.choice(["<", "<=", "!=","%","^","&","*","/"])
         elif a == b:
-            op = random.choice(["==", "<=", ">="])
+            op = random.choice(["==", "<=", ">=","%","^","&","*","/"])
         elif a > b:
-            op = random.choice([">", ">=", "!="])
+            op = random.choice([">", ">=", "!=","%","^","&","*","/"])
         tmp.append(f"{a}{op}{b}")
     return tmp
 
@@ -84,7 +84,9 @@ def code_generator(size=100):
                                 enclose(int_comparison_generator(size=size), "(", ")"))
     tmp += int_comparison_generator(size=size)
     tmp += function_call_generator(size=size)
+    tmp += dot_operator(size=size)
     tmp = partially_add_semicolon(tmp)
+    tmp = partially_add_dollar_and_hashtag(tmp)
     random.shuffle(tmp)
     return tmp[:size]
 
@@ -97,6 +99,28 @@ def partially_add_semicolon(text, p=0.2):
         else:
             tmp.append(word)
     return tmp
+
+
+def partially_add_dollar_and_hashtag(text, p=0.4):
+    tmp = []
+    for word in text:
+        if random.random() < p:
+            tmp.append(random.choice(["#","$"]) + word)
+        else:
+            tmp.append(word)
+    return tmp
+
+
+def dot_operator(size=20):
+    tmp = []
+    for _ in range(size):
+        call = random.choice(words)
+        n_dots = random.randint(1,3)
+        for _ in range(n_dots):
+            call += "." + random.choice(words)
+        tmp.append(call)
+    return tmp
+
 
 
 if __name__ == "__main__":
